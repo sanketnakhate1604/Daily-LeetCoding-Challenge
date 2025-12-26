@@ -9,15 +9,15 @@ public:
         int minPenalty = penalty;
         int bestHour = 0;
 
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers[i] == 'Y')
+        for (int i = 1; i <=customers.size(); i++) {
+            if (customers[i-1] == 'Y')
                 penalty--;
             else
                 penalty++;
 
             if (penalty < minPenalty) {
                 minPenalty = penalty;
-                bestHour = i + 1;
+                bestHour = i ;
             }
         }
 
