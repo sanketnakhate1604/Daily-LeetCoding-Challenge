@@ -29,12 +29,13 @@ public:
             curr = front;
         }
 
-        // reconnect
+        
         if (end != NULL) {
             end->next = prev;   // ✅ correct
         } else {
             head = prev;        // left == 1 case
         }
+       
 
         start->next = curr;
 
