@@ -11,26 +11,43 @@
  */
 class Solution {
 public:
-    // sum[d] = the sum of the nodes on depth d
-    map <int, int> sum;
-    void dfs(TreeNode* u, int depth){
-        sum[depth] += u -> val;
-        if(u -> left != NULL){
-            dfs(u -> left, depth + 1);
-        }
-        if(u -> right != NULL){
-            dfs(u -> right, depth + 1);
-        }
-    }
     int maxLevelSum(TreeNode* root) {
-        sum.clear();
-        dfs(root, 1);
-        int d = 1;
-        for(auto [depth, s] : sum){
-            if(s > sum[d]){
-                d = depth;
-            }
+        if(root==NULL){
+            return NULL;
         }
-        return d;
+        queue<TreeNode*>q;
+        q.push(root);
+        int res=INT_MIN;
+        int level=0;
+        int ans=-1;
+
+        while(q.empty()==0){
+            int size=q.size();
+            int sum=0;
+
+            for(int i=0;i<size;i++){
+                TreeNode*temp=q.front();
+                sum=sum+temp->val;
+                q.pop();
+
+                if(temp->left){
+                    q.push(temp->left);
+                }
+
+                if(temp->right){
+                    q.push(temp->right);
+                }
+
+            }
+            level++;
+            if(sum>res){
+                res=sum;
+                ans=level;
+
+            }
+
+        }
+
+        return ans;
     }
 };
