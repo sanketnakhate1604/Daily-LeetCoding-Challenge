@@ -3,34 +3,28 @@ public:
     int threeSumClosest(vector<int>& nums, int target) {
         int n=nums.size();
         sort(nums.begin(),nums.end());
+        int colse_sum=nums[0]+nums[1]+nums[2];
 
-        int close_sum=nums[0]+nums[1]+nums[2];
-        
-
-        for(int i=0;i<n;i++){
-            
+        for(int i=0;i<=n-3;i++){
             int low=i+1;
             int high=n-1;
-            
+
             while(low<high){
                 int sum=nums[i]+nums[low]+nums[high];
-                if(abs(sum-target)<abs(close_sum-target)){
-                    close_sum=sum;
+
+                if(abs(colse_sum-target)>abs(sum-target)){
+                    colse_sum=sum;
                 }
 
-                if(sum==target){
-                    return sum;
-                }
-                if(sum>target){
-                    high--;
-                }
-                else{
+                if(sum<target){
                     low++;
                 }
+                else{
+                    high--;
+                }
             }
-
         }
-        return close_sum;
+
+        return colse_sum;
     }
-    
 };
