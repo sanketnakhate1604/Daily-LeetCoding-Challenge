@@ -10,26 +10,31 @@
  * };
  */
 class Solution {
-public:
-    bool isSameTree(TreeNode* root1, TreeNode* root2) {
-        if(root1==NULL && root2==NULL){
+public: 
+    bool fun(TreeNode* tree1, TreeNode* tree2){
+        if(tree1==NULL && tree2==NULL){
             return true;
         }
-        if(root1==NULL && root2!=NULL){
-            return false;
-        }
-        if(root1!=NULL && root2==NULL){
-            return false;
-        }
 
-        if (root1->val != root2->val) {
+        if(tree1==NULL || tree2==NULL){
             return false;
         }
 
-        // konsa bhi traversal laga ke check kar le mama 
-        
-        return(isSameTree(root1->left,root2->left) && isSameTree(root1->right,root2->right));
+        if(tree1->val != tree2->val){
+            return false;
+        }
 
+        bool r1=fun(tree1->left,tree2->left);
 
+        bool r2=fun(tree1->right,tree2->right);
+
+        if(r1==true && r2==true){
+            return true;
+        }
+
+        return false;
+    }
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        return fun(p,q);
     }
 };
