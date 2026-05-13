@@ -11,22 +11,31 @@
  */
 class Solution {
 public:
-    
-    bool ismirror(TreeNode*t1,TreeNode*t2){
-        if(t1==NULL && t2==NULL){
+    bool mirror(TreeNode *tree1 ,TreeNode* tree2){
+         if(tree1==NULL && tree2==NULL){
             return true;
-        }
-        if(t1==NULL ||t2==NULL){
+         }
+         if(tree1==NULL || tree2==NULL){
             return false;
-        }
+         }
 
-        return (t1->val==t2->val)&& ismirror(t1->left,t2->right) && ismirror(t1->right,t2->left);
+         
+         if(tree1->val != tree2->val){
+            return false;
+         }
+
+         bool r1=mirror(tree1->left,tree2->right);
+         bool r2=mirror(tree1->right,tree2->left);
+
+         
+
+         return r1 && r2;
     }
-     
     bool isSymmetric(TreeNode* root) {
         if(root==NULL){
             return true;
         }
-        return(ismirror(root->left,root->right));
+
+        return  mirror(root->left,root->right);
     }
 };
