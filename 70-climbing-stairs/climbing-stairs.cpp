@@ -1,22 +1,20 @@
 class Solution {
 public:
-   
-    int f(int n,vector<int>&t){
-        if (n==0){
+     vector<int> memo = vector<int>(46, -1);
+    int climbStairs(int n) {
+        if(n<=0){
             return 1;
         }
-        if(n<0){
-            return 0;
+
+        if(memo[n]!=-1){
+            return memo[n];
         }
 
-        if(t[n]!=-1){
-            return t[n];
-        }
+        int step1=climbStairs(n-1);
+        int step2=0;
+        if(n>=2)
+           step2=climbStairs(n-2);
 
-        return t[n]=f(n-1,t)+f(n-2,t);
-    }
-    int climbStairs(int n) {
-        vector<int>t(n+1,-1);
-        return f(n,t);
+        return memo[n]=step1+step2;
     }
 };
